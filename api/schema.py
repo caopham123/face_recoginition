@@ -5,10 +5,10 @@ from typing import Any, List, Optional
 from enum import Enum, auto
 
 class Image(BaseModel):
-    file_img: str = Field(examples="base64")
+    image: str = Field(examples="base64")
     class Config:
         schema_json_extra = {
             "example" : {
-                "file_img": "base64"
+                "image": "base64"
             }
         }
