@@ -23,3 +23,8 @@ def RGB2String(image):
 # im_bytes = base64.b64decode(str_bs64) ## b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00\
 # im_arr = np.frombuffer(im_bytes, dtype=np.uint8) # [255 216 255 ...  31 255 217]
 
+def str2List(myStr):
+    """Convert string to List(tupe, arr)"""
+    myStr = myStr.replace("[","")
+    myStr = myStr.replace("]","")
+    return myStr.split()

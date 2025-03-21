@@ -1,7 +1,10 @@
 import cv2
 import numpy as np
-from .settings import MODEL_LOAD
+from .settings import MODEL_PATH
+from insightface.app import FaceAnalysis
 
+MODEL_LOAD = FaceAnalysis(name=MODEL_PATH, allowed_modules=None, providers=['CPUExecutionProvider'])
+MODEL_LOAD.prepare(ctx_id=0, det_size=(640,640))
 
 class FaceDetection:
     def __init__(self):

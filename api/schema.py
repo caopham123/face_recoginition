@@ -1,7 +1,6 @@
-import os
+import numpy as np
 from pydantic import BaseModel, Field
 from typing import Any, List, Optional
-import uuid
 from enum import Enum, auto
 
 class Image(BaseModel):
@@ -13,16 +12,16 @@ class Image(BaseModel):
             }
         }
 
-class Test(BaseModel):
-    img: str
-
 class Member(BaseModel):
     email: str = Field(examples="test213@gmail.com")
     name: str
+    # embedding: np.array
+
     class Config:
         json_schema_extra = {
             "example" : {
                 "email": "test213@gmail.com",
-                "name": "Test Name"
+                "name": "Test Name",
+                # "embedding": [0.34, 0.56, 0.78, 0.90]
             }
         }
