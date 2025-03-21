@@ -1,3 +1,4 @@
-ultralytics
+insightface
 fastapi
 uvicorn
+pydantic
