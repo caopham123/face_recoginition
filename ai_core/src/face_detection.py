@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 from .settings import MODEL_PATH
+# from settings import MODEL_PATH
 from insightface.app import FaceAnalysis
 
 MODEL_LOAD = FaceAnalysis(name=MODEL_PATH, allowed_modules=None, providers=['CPUExecutionProvider'])
@@ -22,6 +23,7 @@ class FaceDetection:
 
             bboxs = faces_detect[0].bbox.astype(np.int32)
             cropped_image = rec_image[bboxs[1]: bboxs[3], bboxs[0]: bboxs[2], :]
+            print(f"embedding: {vector_embedding}")
             return cropped_image, vector_embedding
         return None
 
