@@ -93,15 +93,18 @@ def service_add_face(target_member_id: str, img_str: str):
                 _member_id = target_member_id
                 print(f"found member: {_member_id}")
                 member['embedding'] = embedding
+                member['image'] = img_str
                 break
         
         content={
                 "email": member["email"],
                 "name": member["name"],
                 "embedding": embedding,
+                "image": img_str,
                 "member_id": _member_id
             }
-        append_db(content)
+        with open(DB_FILE, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
 
         return JSONResponse(
             status_code=status.HTTP_200_OK,

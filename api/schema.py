@@ -17,6 +17,7 @@ class Member(BaseModel):
     email: str = Field(examples="test213@gmail.com")
     name: str
     embedding: Optional[str] = None
+    image: Optional[str] = None
     member_id: Optional[str] = None
 
     class Config:
@@ -33,6 +34,7 @@ class UpdateMember(BaseModel):
     email: Optional[str] = None
     name: Optional[str] = None
     embedding: Optional[str] = None
+    image: Optional[str] = None
     member_id: str = Field(examples="53445ba0-80af24802")
 
     # class Config:

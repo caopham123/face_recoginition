@@ -29,5 +29,5 @@ async def post_member(member: Member):
     return service_post_member(member.email, member.name)
 
 @router.put("/update_member")
-async def update_member(member: UpdateMember, img_str: str):
-    return service_add_face(member.member_id, img_str)
+async def update_member(member: UpdateMember):
+    return service_add_face(member.member_id, member.image)
