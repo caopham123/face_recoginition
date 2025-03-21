@@ -3,6 +3,7 @@ from api.helpers.commons import stringToRGB, RGB2String
 from fastapi.responses import JSONResponse
 from fastapi import FastAPI, status
 import logging, uuid
+from typing import Optional
 import json
 
 ## Create a Face Detection obj
@@ -59,14 +60,14 @@ def service_embedding_face(img_base64: str):
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST,
                              content={"msg": f"Error during embedding {str(e)}"})
 
-def service_post_member(email: str, name: str ):
+def service_post_member(email: Optional[str], name: Optional[str] ):
     try:
         member_id = str(uuid.uuid4())
         content = {
-            "email": email, "name": name, "member_id": member_id
+            "email": email, "name": name, 
+            "embedding": None, "member_id": member_id 
         }
-        # content_email = content.get("email")
-        # print(f"srv_post_mem: {content_email}")
+
         append_db(content)
         return JSONResponse(status_code=status.HTTP_200_OK, content=content)
     
@@ -76,6 +77,7 @@ def service_post_member(email: str, name: str ):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             content={"msg": f"Error during processing {str(e)}"})
 
+# def service_update_member(vector_embedding: str, member_id: uuid):
 
     
 def append_db(content: json):
