@@ -10,7 +10,10 @@ face_detection = FaceDetection()
 logger = logging.getLogger(__name__)
 
 
+DB_FILE = "db.json"
 data = {}
+with open(DB_FILE, "r", encoding="utf-8") as f:
+    data = json.load(f)
 # def service_detect_face(image: str):
 #     try:
 #         image = stringToRGB(image)
@@ -44,13 +47,14 @@ def service_embedding_face(img_base64: str):
         image = stringToRGB(img_base64)
         _, vector_embedding = face_detection.detect_face(image)
 
-        return JSONResponse(
-            status_code=status.HTTP_200_OK,
-            content= {
-                "lenght": len(vector_embedding),
-                "vector": str(vector_embedding)
-            }
-        )
+        return vector_embedding
+        # return JSONResponse(
+        #     status_code=status.HTTP_200_OK,
+        #     content= {
+        #         "lenght": len(vector_embedding),
+        #         "vector": str(vector_embedding)
+        #     }
+        # )
     except Exception as e:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST,
                              content={"msg": f"Error during embedding {str(e)}"})
@@ -63,6 +67,7 @@ def service_post_member(email: str, name: str ):
         }
         # content_email = content.get("email")
         # print(f"srv_post_mem: {content_email}")
+        append_db(content)
         return JSONResponse(status_code=status.HTTP_200_OK, content=content)
     
     except Exception as e:
@@ -71,10 +76,9 @@ def service_post_member(email: str, name: str ):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             content={"msg": f"Error during processing {str(e)}"})
 
-def load_db():
-    with open("db.json", "r", encoding="utf-8") as f:
-        data = json.load(f)
+
     
-def append_db():
-    with open("db.json", "w", encoding="utf-8") as f:
+def append_db(content: json):
+    data["members"].append(content)
+    with open(DB_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)

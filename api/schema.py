@@ -25,3 +25,16 @@ class Member(BaseModel):
                 # "embedding": [0.34, 0.56, 0.78, 0.90]
             }
         }
+class UpdateMember(BaseModel):
+    email: str = Field(examples="test213@gmail.com")
+    name: str
+    embedding: str
+
+    class Config:
+        json_schema_extra = {
+            "example" : {
+                "email": "test213@gmail.com",
+                "name": "Test Name",
+                "embedding": "[0.34, 0.56, 0.78, 0.90]"
+            }
+        }

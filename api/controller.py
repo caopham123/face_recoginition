@@ -1,7 +1,7 @@
 from api.schema import Image, Member
 from fastapi import APIRouter, status
 from fastapi.responses import JSONResponse
-from .services.service import service_detect_face, service_post_member, service_embedding_face
+from .services.service import service_post_member, service_embedding_face
 
 router = APIRouter(
     prefix="/api/v1",
