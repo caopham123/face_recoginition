@@ -24,7 +24,7 @@ class FaceDetection:
             bboxs = faces_detect[0].bbox.astype(np.int32)
             cropped_image = rec_image[bboxs[1]: bboxs[3], bboxs[0]: bboxs[2], :]
             print(f"embedding: {vector_embedding}")
-            return cropped_image, vector_embedding
+            return cropped_image, vector_embedding.tolist()
         return None
 
     
