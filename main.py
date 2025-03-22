@@ -2,7 +2,7 @@ from fastapi import FastAPI
 import os
 import sys
 from fastapi.middleware.cors import CORSMiddleware
-from middlewares.middleware import catch_exceptions_middleware
+from api.middlewares.middleware import catch_exceptions_middleware
 from api.controller import router
 sys.dont_write_bytecode = True
 
